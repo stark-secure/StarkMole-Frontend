@@ -27,7 +27,6 @@ interface Achievement {
   rarity: "common" | "rare" | "epic" | "legendary";
 }
 
-// Mock data - in real app this would come from your backend
 const mockPlayers: Player[] = [
   {
     id: "1",
@@ -179,7 +178,7 @@ export function LeaderboardSection() {
     const fetchLeaderboard = async () => {
       try {
         setLoading(true);
-        // Simulate network delay
+
         await new Promise((resolve) => setTimeout(resolve, 1500));
         setPlayers(mockPlayers);
       } catch (err) {
@@ -192,7 +191,7 @@ export function LeaderboardSection() {
     fetchLeaderboard();
 
     // Set up polling for real-time updates
-    const interval = setInterval(fetchLeaderboard, 30000); // Update every 30 seconds
+    const interval = setInterval(fetchLeaderboard, 180000);
     return () => clearInterval(interval);
   }, []);
 
