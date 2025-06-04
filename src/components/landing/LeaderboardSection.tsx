@@ -223,7 +223,7 @@ export function LeaderboardSection() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div id="#leaderboard" className="container mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-cyan-400 mb-4">
           Global Leaderboard
