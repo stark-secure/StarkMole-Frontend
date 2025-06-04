@@ -40,7 +40,7 @@ export function Navbar({ onLoginClick }: NavbarProps) {
         <Link href="/#how-to-play" className="text-gray-300 hover:text-white">
           How to Play
         </Link>
-        <Link href="/#leaderboard" className="text-gray-300 hover:text-white">
+        <Link href="/leaderboard" className="text-gray-300 hover:text-white">
           Leaderboard
         </Link>
         <Link href="/#about" className="text-gray-300 hover:text-white">
@@ -51,7 +51,6 @@ export function Navbar({ onLoginClick }: NavbarProps) {
       {/* Login Button */}
       <div className="w-[200px] flex justify-end">
         <Button
-          
           style={{
             borderRadius: "33px",
             height: "42px",

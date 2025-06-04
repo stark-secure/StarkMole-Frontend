@@ -6,8 +6,6 @@ import { Navbar } from "@/components/landing/Navbar";
 import { useRouter } from "next/navigation";
 import TestimonialsSection from "../components/landing/TestimonialsSection";
 
-
-
 export default function Home() {
   const router = useRouter();
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -21,12 +19,10 @@ export default function Home() {
     router.push("/login");
   };
   return (
-   
-      <main className="min-h-screen bg-gray-900 text-white">
-       <Navbar onLoginClick={handleLoginClick} />
-       <HeroSection onSignUp={() => router.push("/signup")} /> 
-        <TestimonialsSection />
-      </main>
-   
+    <main className="min-h-screen bg-gray-900 text-white">
+      <Navbar onLoginClick={handleLoginClick} />
+      <HeroSection onSignUp={() => router.push("/signup")} />
+      <TestimonialsSection />
+    </main>
   );
 }
