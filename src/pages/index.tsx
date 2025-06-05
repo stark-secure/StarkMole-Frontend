@@ -5,8 +5,7 @@ import { HeroSection } from "@/components/landing/HeroSection";
 import { Navbar } from "@/components/landing/Navbar";
 import { useRouter } from "next/navigation";
 import TestimonialsSection from "../components/landing/TestimonialsSection";
-
-
+import { LeaderboardSection } from "@/components/landing/LeaderboardSection";
 
 export default function Home() {
   const router = useRouter();
@@ -21,12 +20,11 @@ export default function Home() {
     router.push("/login");
   };
   return (
-   
-      <main className="min-h-screen bg-gray-900 text-white">
-       <Navbar onLoginClick={handleLoginClick} />
-       <HeroSection onSignUp={() => router.push("/signup")} /> 
-        <TestimonialsSection />
-      </main>
-   
+    <main className="min-h-screen bg-gray-900 text-white">
+      <Navbar onLoginClick={handleLoginClick} />
+      <HeroSection onSignUp={() => router.push("/signup")} />
+      <LeaderboardSection />
+      <TestimonialsSection />
+    </main>
   );
 }
