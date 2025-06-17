@@ -2,12 +2,31 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import React, { useEffect, useState } from "react";
 
 interface NavbarProps {
   onLoginClick: () => void;
 }
 
 export function Navbar({ onLoginClick }: NavbarProps) {
+  const [activeSection, setActiveSection] = useState<string>("");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const features = document.getElementById("features");
+      if (features) {
+        const rect = features.getBoundingClientRect();
+        if (rect.top <= 80 && rect.bottom >= 80) {
+          setActiveSection("features");
+        } else {
+          setActiveSection("");
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <nav
       style={{
@@ -34,7 +53,10 @@ export function Navbar({ onLoginClick }: NavbarProps) {
 
       {/* Center Navigation */}
       <div className="flex-1 flex items-center justify-center gap-8">
-        <Link href="/#features" className="text-gray-300 hover:text-white">
+        <Link
+          href="/#features"
+          className={`text-gray-300 hover:text-white ${activeSection === "features" ? "font-bold text-blue-400 underline" : ""}`}
+        >
           Features
         </Link>
         <Link href="/#how-to-play" className="text-gray-300 hover:text-white">

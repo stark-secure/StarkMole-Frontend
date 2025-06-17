@@ -1,82 +1,117 @@
 import React from "react";
+import { FaGamepad, FaCoins, FaTrophy, FaShieldAlt, FaUsers, FaWallet } from "react-icons/fa";
 import { motion } from "framer-motion";
-import FeatureCard from "./FeatureCard";
-import FeatureDemo from "./FeatureDemo";
-import { FaRocket, FaCoins, FaGamepad } from "react-icons/fa";
 
 const features = [
   {
-    title: "On-Chain Gameplay",
-    description: "Experience real-time, verifiable actions powered by blockchain.",
-    icon: <FaGamepad />,
+    title: "Daily Challenges",
+    icon: <FaGamepad className="text-purple-400" size={28} />,
+    iconBg: "bg-purple-900",
+    description:
+      "Engage in daily Whack-a-Mole challenges that test your reflexes and strategic thinking. Each day brings new challenges with varying difficulty levels.",
   },
   {
-    title: "Token Integration",
-    description: "Earn, trade, and use tokens seamlessly within the game.",
-    icon: <FaCoins />,
+    title: "On-Chain Rewards",
+    icon: <FaCoins className="text-blue-400" size={28} />,
+    iconBg: "bg-blue-900",
+    description:
+      "Earn rewards for your performance in the form of digital assets and tokens. All rewards are recorded on the blockchain, ensuring transparency.",
   },
   {
-    title: "Dynamic Challenges",
-    description: "Face evolving gameplay and compete for top rewards.",
-    icon: <FaRocket />,
+    title: "Decentralized Leaderboards",
+    icon: <FaTrophy className="text-green-400" size={28} />,
+    iconBg: "bg-green-900",
+    description:
+      "Compete with players from around the world on decentralized leaderboards. Track your progress and see how you stack up against others in real-time.",
+  },
+  {
+    title: "Blockchain Security",
+    icon: <FaShieldAlt className="text-orange-400" size={28} />,
+    iconBg: "bg-orange-900",
+    description:
+      "Enjoy the security and transparency of blockchain technology. All game data, scores, and rewards are secured on the StarkNet blockchain.",
+  },
+  {
+    title: "Community Features",
+    icon: <FaUsers className="text-red-400" size={28} />,
+    iconBg: "bg-red-900",
+    description:
+      "Connect with other players through in-game social features. Share your achievements and compete for top spots on the global leaderboards.",
+  },
+  {
+    title: "StarkNet Integration",
+    icon: <FaWallet className="text-indigo-400" size={28} />,
+    iconBg: "bg-indigo-900",
+    description:
+      "Seamlessly connect your StarkNet wallet to play, earn, and track your rewards. Experience the future of gaming with blockchain technology.",
   },
 ];
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.2 } },
+const cardVariants = {
+  offscreen: { opacity: 0, y: 40, scale: 0.95 },
+  onscreen: { opacity: 1, y: 0, scale: 1, transition: { type: "spring" as const, bounce: 0.25, duration: 0.7 } },
+};
+
+const iconVariants = {
+  initial: { rotate: -10, scale: 0.8 },
+  animate: { rotate: 0, scale: 1, transition: { type: "spring" as const, stiffness: 300, damping: 15 } },
+  hover: { scale: 1.15, rotate: 8, transition: { type: "spring" as const, stiffness: 300 } },
 };
 
 const FeaturesSection: React.FC = () => (
-  <section style={{ padding: "48px 0", background: "#151821" }}>
-    <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 16px" }}>
-      <motion.h2
+  <section id="features" className="w-full bg-[#151821] py-16 px-4">
+    <div className="max-w-5xl mx-auto">
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
         viewport={{ once: true }}
-        style={{ color: "#fff", fontSize: 36, marginBottom: 16 }}
+        className="text-center mb-12"
       >
-        Features
-      </motion.h2>
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, delay: 0.2 }}
-        viewport={{ once: true }}
-        style={{ color: "#b0b8c1", fontSize: 18, marginBottom: 32 }}
-      >
-        Discover what makes StarkMole unique. Explore gameplay, token mechanics, and more.
-      </motion.p>
-      <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: 24,
-        }}
-      >
-        {features.map((f, i) => (
-          <FeatureCard key={i} {...f} />
-        ))}
+        <motion.h2
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="text-3xl md:text-4xl font-bold text-yellow-400 mb-2"
+        >
+          Key Features
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="text-gray-300 text-lg"
+        >
+          Discover what makes StarkMole a unique StarkNet gaming experience.
+        </motion.p>
       </motion.div>
-      <FeatureDemo />
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {features.map((feature, idx) => (
+          <motion.div
+            key={idx}
+            className="relative bg-[#23293a] rounded-2xl p-6 pt-8 shadow-lg border-b-4 border-yellow-400 flex flex-col min-h-[260px] transition-transform"
+            initial="offscreen"
+            whileInView="onscreen"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={cardVariants}
+            whileHover={{ scale: 1.03, boxShadow: "0 8px 32px 0 rgba(255, 221, 51, 0.10)" }}
+            transition={{ type: "spring", bounce: 0.25, duration: 0.7, delay: idx * 0.12 }}
+          >
+            <motion.div
+              className={`absolute -top-5 left-5 rounded-full p-2 ${feature.iconBg} shadow-md`}
+              variants={iconVariants}
+              initial="initial"
+              animate="animate"
+              whileHover="hover"
+            >
+              {feature.icon}
+            </motion.div>
+            <h3 className="mt-6 mb-2 text-xl font-bold text-white">{feature.title}</h3>
+            <p className="text-gray-300 text-base">{feature.description}</p>
+          </motion.div>
+        ))}
+      </div>
     </div>
-    {/* Responsive styles */}
-    <style>
-      {`
-        @media (max-width: 700px) {
-          .feature-card {
-            min-width: 90vw !important;
-            margin: 12px 0 !important;
-          }
-        }
-      `}
-    </style>
   </section>
 );
 
